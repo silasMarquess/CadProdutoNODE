@@ -8,19 +8,19 @@
                 <div class="responsive-class-table">
                     <table class="table">
                         <tr>
-                            <th>Nome</th>
-                            <th>Descrição:</th>
-                            <th>Preço R$</th>
-                            <th>Estoque Atual (QTDE)</th>
-                            <th colspan="2" style="text-align: center;">Operações</th>          
+                            <th>NOME</th>
+                            <th>DESCRIÇÃO</th>
+                            <th>PREÇO</th>
+                            <th>ESTOQUE</th>
+                            <th colspan="2" style="text-align: center;">OPERCÇÕES</th>          
                         </tr>
                         <%produtos.forEach(produto=>{ %>
-                            <tr>
-                                <td><%=produto.nome%></td>
+                            <tr class="table-active">
+                                <td><%=produto.nome.toUpperCase()%></td>
                                 <td><%=produto.descricao%></td>
-                                <td><%=produto.preco%></td>
-                                <td><%=produto.estoque%></td>
-                                <td><a href="/cadastro/<%=produto._id%>">Editar</a></td>
+                                <td><%=produto.preco%> R$</td>
+                                <td><%=produto.estoque%> UN</td>
+                                <td><a href="/cadastro/<%=produto._id%>"><i>Editar</i></a></td>
                                 <td><a href="/codastro/delete/<%=produto._id%>" class="text-danger">Excluir</a></td>
                             </tr>
                         <% }); %>
