@@ -5,21 +5,26 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
           
-          <div class="row">
-            <div class="col-lg-8">
-              <h4>Faça aqui o cadatro de Produtos:</h4>
+          <div class="row card">
+            <div class="col-lg-5 card-body">
+              <h4>Faça aqui o cadatro/Atualização de Produtos:</h4>
               <%-include('includes/messages')%>
                           <form method="POST" action="/cadastro/register/<%=p._id%>">
                            <input type="hidden" name="_csrf" value="<%- csrfToken %>">
 
                               <div class="form-group">
-                                <label for="txtNome">Informe o nome do Produto:</label>
+                                <label for="txtNome">Nome do Produto:</label>
                                 <input type="text" class="form-control" name="nome_produto" id="txtNome" value="<%=p.nome%>">
                               </div>
-    
+
+                              <div class="form-group">
+                                <label for="txtDescricao">Descrição (máximo 500 caracteres) (Opcional):</label>
+                                <input type="text" class="form-control" maxlength="500" id="txtDescricao" name="descricao_produto" value="<%=p.descricao%>">
+                              </div>
+  
                               <div class="form-group">
                                 <label for="txtPreco">Preço do Produto (R$):</label>
-                                <input type="number" class="form-control" id="txtPreco" name="preco_produto" value="<%=p.preco%>">
+                                <input type="number" step=".01" class="form-control" id="txtPreco" name="preco_produto" value="<%=p.preco%>">
                               </div>
     
                               <div class="form-group">

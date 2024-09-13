@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 //na base. Neste caso devemos passar um Shema
 const produtoModel = new mongoose.Schema({
     nome: { type: 'String', require: true },
+    descricao:{type:'String', require:false},
     preco: { type: 'Number', require: true },
-    estoque: { type: 'Number', require: true}
+    estoque: { type: 'Number', require: true},
 })
 
 const ProdutoModel = mongoose.model('produto', produtoModel);
@@ -38,7 +39,7 @@ class Produto {
     Valida() {
         this.cleanUp();
         if (this.body.nome == '')this.errors.push('Nome não pode ser vazio');
-        if(this.body.nome !== '' && !(Number.isNaN(Number(this.body.nome)))) this.errors.push('Nome não pode ser um numero');
+        if(this.body.nome !== '' && !(Number.isNaN(Number(this.body.nome)))) this.errors.push('Campo de Nome não pode ser numérico');
         if (this.body.preco == '') this.errors.push('preço não pode ser vazio');
         if (this.body.estoque == '') this.errors.push('estoque não pode ser vazio');
         //o valor do estoque não pode ser negativo
@@ -57,7 +58,6 @@ class Produto {
         return obj;
     }
 
-
     cleanUp() {
         for (let key in this.body) {
             if (typeof this.body[key] !== 'string') {
@@ -67,12 +67,13 @@ class Produto {
 
         this.body = {
             nome: this.body.nome_produto,
+            descricao: this.body.descricao_produto,
             preco: this.body.preco_produto,
             estoque: this.body.estoque_produto
         }
     }
 
-    static async buscaContatos(){
+    static async buscaProdutos(){
         const contatos = await ProdutoModel.find();
         return contatos;
     }

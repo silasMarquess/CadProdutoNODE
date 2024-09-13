@@ -3,7 +3,7 @@ const Produto= require(path.resolve('src','models','produtoModel'));
 const HomeModelo = require(path.resolve('src','models','HomeModel'));
 
 module.exports.SetHomePage =async(req,res,next)=>{
-    const produtos = await Produto.buscaContatos();
+    const produtos = await Produto.buscaProdutos();
     res.render('index',{produtos});
     next();
 }
