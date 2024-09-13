@@ -7,7 +7,7 @@ const helmet = require('helmet');
 const csurf = require('csurf');
 //mongo
 const mongoose = require('mongoose');
-//const {mid1,checkCsrfErro,csrfMiddleware} = require(path.resolve(__dirname,'src','middlewares','middleware'));
+const {middleGlobal,CheckErrocsrf,csrfMiddleware} = require(path.resolve(__dirname,'src','middlewares','mymiddleware'));
 
 mongoose.connect(process.env.__connectionString)
 .then(() => {
@@ -26,6 +26,7 @@ const { options } = require('./router');
 const routes = require(path.resolve(__dirname, 'router'));
 
 app.use(express.urlencoded({ extended: true }));
+
 const sessionConfig=session({
     secret:'wqrwtwetqwtqwt',
     store: MongoStore.create(mongoose.connection),
@@ -39,12 +40,14 @@ const sessionConfig=session({
 app.use(sessionConfig);
 app.use(Flash());
 app.use(helmet());
-
+//app.use(middleGlobal);
 app.use(csurf());
-// app.use(checkCsrfErro);
-// app.use(csrfMiddleware);
+app.use(middleGlobal);
+app.use(csrfMiddleware);
+app.use(CheckErrocsrf);
 
 app.use(routes);
+
 app.use(express.static(path.resolve(__dirname, 'public')));//estou informando para o express que conteudo statico fica na pasta public
 app.set('views', path.resolve(__dirname, 'src', 'views'));
 app.set('view engine', 'ejs');

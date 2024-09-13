@@ -8,10 +8,21 @@
                 <div class="responsive-class-table">
                     <table class="table">
                         <tr>
-                            <td>Manteiga</td>
-                            <td>2,90</td>
-                            <td>34</td>
+                            <th>Nome</th>
+                            <th>Preço R$</th>
+                            <th>Estoque Atual (QTDE)</th>
+                            <th colspan="2" style="text-align: center;">Operações</th>          
                         </tr>
+                        <%produtos.forEach(produto=>{ %>
+                            <tr>
+                                <td><%=produto.nome%></td>
+                                <td><%=produto.preco%></td>
+                                <td><%=produto.estoque%></td>
+                                <td><a href="/cadastro/<%=produto._id%>">Editar</a></td>
+                                <td><a href="/codastro/delete/<%=produto._id%>" class="text-danger">Excluir</a></td>
+                            </tr>
+                        <% }); %>
+                       
                     </table>
                 </div>
             </div>

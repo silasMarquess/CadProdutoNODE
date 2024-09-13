@@ -1,8 +1,10 @@
 const path = require('path');
+const Produto= require(path.resolve('src','models','produtoModel'));
 const HomeModelo = require(path.resolve('src','models','HomeModel'));
 
-module.exports.SetHomePage = (req,res,next)=>{
-    res.render('index');
+module.exports.SetHomePage =async(req,res,next)=>{
+    const produtos = await Produto.buscaContatos();
+    res.render('index',{produtos});
     next();
 }
 
